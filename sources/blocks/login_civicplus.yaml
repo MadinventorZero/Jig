@@ -1,0 +1,40 @@
+id: login_civicplus
+name: CivicPlus Portal Login
+version: 1
+
+params:
+  url:      ""
+  username: ""
+  password: ""
+
+steps:
+  - step_id: navigate_login
+    type: browser_navigate
+    params:
+      url: "{{ block.url }}"
+      wait_until: networkidle
+
+  - step_id: fill_username
+    type: browser_fill
+    params:
+      selector: "input[name='username'], input[type='email'], #username"
+      value: "{{ block.username }}"
+
+  - step_id: fill_password
+    type: browser_fill
+    params:
+      selector: "input[name='password'], input[type='password'], #password"
+      value: "{{ block.password }}"
+
+  - step_id: click_login
+    type: browser_click
+    params:
+      selector: "button[type='submit'], input[type='submit'], .login-btn"
+    on_choice:
+      ok: verify_login
+
+  - step_id: verify_login
+    type: browser_extract
+    params:
+      selector: ".user-nav, .logged-in, [data-testid='user-menu']"
+      attribute: "innerText"

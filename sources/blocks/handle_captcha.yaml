@@ -1,0 +1,51 @@
+id: handle_captcha
+name: Handle CAPTCHA Challenge
+version: 1
+
+params:
+  screenshot_path: ""   # optional pre-taken path; empty = action takes its own
+
+steps:
+  - step_id: detect
+    type: captcha_detect
+    params:
+      screenshot_path: "{{ block.screenshot_path }}"
+    on_choice:
+      no_captcha: done_no_captcha
+      captcha:    extract_tiles
+
+  - step_id: extract_tiles
+    type: captcha_extract_tiles
+    params:
+      screenshot_path: "{{ block.screenshot_path }}"
+      instructions: "{{ steps.detect.result.instructions }}"
+      grid_size: 9
+    on_choice:
+      ok: execute_clicks
+
+  - step_id: execute_clicks
+    type: captcha_execute
+    params:
+      tile_positions: "{{ steps.extract_tiles.result.tile_positions }}"
+    on_choice:
+      ok: verify
+
+  - step_id: verify
+    type: captcha_parse_reply
+    on_choice:
+      solved:   done_solved
+      unsolved: __end__     # caller decides whether to loop or escalate
+
+  - step_id: done_solved
+    type: condition
+    params:
+      value: "captcha_solved"
+    on_choice:
+      captcha_solved: __end__
+
+  - step_id: done_no_captcha
+    type: condition
+    params:
+      value: "no_captcha"
+    on_choice:
+      no_captcha: __end__

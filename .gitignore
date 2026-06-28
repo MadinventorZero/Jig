@@ -1,0 +1,82 @@
+
+# ── mad_tools: seed_context ─────────────────────────────────────────────────────
+
+# Context (always local)
+.context/
+
+# macOS / Windows
+.DS_Store
+Thumbs.db
+
+# Environment / secrets
+.env
+.env.local
+.env.*.local
+
+# Node.js
+node_modules/
+dist/
+.next/
+.nuxt/
+.output/
+coverage/
+.nyc_output/
+.npm/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.tsbuildinfo
+*.tgz
+*.tar.gz
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+.eggs/
+.pytest_cache/
+.tox/
+.coverage
+htmlcov/
+.mypy_cache/
+*.egg
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+target/
+out/
+bin/
+.gradle/
+gradle/wrapper/
+gradle-wrapper.jar
+.settings/
+.project
+.classpath
+*.iml
+
+# Logs and temp
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# IDEs
+.vscode/
+.idea/
+
+# ── end seed_context ───────────────────────────────────────────────────────
+
+# App data (local only — profiles, bookings, logs, screenshots, credentials)
+data/
+

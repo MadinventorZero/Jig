@@ -1,0 +1,19 @@
+pywebview
+playwright
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib
+pyyaml
+python-dateutil
+pytz
+jinja2
+anthropic
+httpx
+apscheduler
+Pillow
+mss
+# macOS tray
+rumps; sys_platform == "darwin"
+# Windows tray + notifications
+pystray; sys_platform == "win32"
+winotify; sys_platform == "win32"
